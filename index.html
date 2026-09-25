@@ -1,11 +1,420 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Jaguar Fitness</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #d4af37;
+            --dark-bg: #0d0d0d;
+            --darker-bg: #050505;
+            --text-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar e Logo */
+        .navbar {
+            background-color: rgba(5, 5, 5, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .navbar-brand img {
+            height: 60px;
+            /* Remove o fundo preto da imagem misturando com o fundo escuro do site */
+            mix-blend-mode: screen; 
+            filter: contrast(1.2);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-gold) !important;
+        }
+
+        /* Seções Gerais */
+        section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title {
+            color: var(--primary-gold);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Home / Info */
+        #home {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            padding-top: 120px; /* Compensa a navbar fixa */
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .carousel-item img {
+            height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        /* Personais */
+        #personais {
+            background-color: var(--darker-bg);
+        }
+
+        .personal-card img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .personal-card:hover img {
+            transform: scale(1.02);
+            border-color: var(--primary-gold);
+        }
+
+        .personal-name {
+            color: var(--primary-gold);
+            margin-top: 1.5rem;
+            font-weight: 700;
+        }
+
+        .personal-bio {
+            color: #aaa;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Planos */
+        .pricing-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .pricing-price {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+            margin: 1.5rem 0;
+        }
+
+        .pricing-price span {
+            font-size: 1.2rem;
+            color: #888;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: var(--dark-bg);
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 10px 30px;
+            border-radius: 30px;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-gold:hover {
+            background-color: #ebd375;
+            color: var(--dark-bg);
+        }
+
+        /* FAQ */
+        #faq {
+            background-color: var(--darker-bg);
+        }
+
+        .accordion-item {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            margin-bottom: 10px;
+            border-radius: 8px !important;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            background-color: #1a1a1a;
+            color: white;
+            font-weight: 600;
+            box-shadow: none !important;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #222;
+            color: var(--primary-gold);
+        }
+
+        .accordion-button::after {
+            filter: invert(1);
+        }
+
+        .accordion-body {
+            color: #bbb;
+        }
+    </style>
 </head>
 <body>
-    <h1>Site Davi natã</h1>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <img src="image_284a87.png" alt="Jaguar Fitness Logo">
+            </a>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Jaguar Fitness</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#personais">Personais</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#planos">Planos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">Dúvidas</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0 pe-lg-5">
+                    <h1>Jaguar Fitness</h1>
+                    <p class="mt-4">
+                        A sua jornada para despertar a força interior começa aqui. Na Jaguar Fitness, 
+                        oferecemos uma estrutura de ponta, equipamentos modernos e um ambiente focado 
+                        em resultados. Seja qual for a sua meta — emagrecimento, hipertrofia ou qualidade 
+                        de vida — nós temos o ambiente perfeito para você superar seus próprios limites 
+                        todos os dias.
+                    </p>
+                    <a href="#planos" class="btn btn-gold mt-3">Comece Agora</a>
+                </div>
+                <div class="col-lg-6">
+                    <div id="gymCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop" class="d-block w-100" alt="Academia 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1470&auto=format&fit=crop" class="d-block w-100" alt="Academia 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1470&auto=format&fit=crop" class="d-block w-100" alt="Academia 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#gymCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Anterior</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#gymCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Próximo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="personais">
+        <div class="container">
+            <h2 class="section-title">Nossos Personais</h2>
+            <div class="row g-5">
+                <!-- Karla Roque -->
+                <div class="col-md-6 personal-card text-center">
+                    <img src="image_28a0f6.jpg" alt="Karla Roque">
+                    <h3 class="personal-name">Karla Roque</h3>
+                    <p class="personal-bio">
+                        Especialista em treinamento de força e condicionamento físico. Karla dedica sua carreira a ajudar 
+                        alunos a conquistarem não apenas o corpo desejado, mas também saúde e disciplina. Seu método 
+                        une foco, técnica apurada e muita motivação diária.
+                    </p>
+                </div>
+                <!-- Flávio Henrique -->
+                <div class="col-md-6 personal-card text-center">
+                    <img src="image_28a0d8.jpg" alt="Flávio Henrique">
+                    <h3 class="personal-name">Flávio Henrique</h3>
+                    <p class="personal-bio">
+                        Com anos de experiência em biomecânica e hipertrofia, Flávio é mestre em extrair o melhor de cada 
+                        aluno. Seu lema baseia-se em "Disciplina, Foco e Constância". Com ele, seu treino é seguro, intenso 
+                        e estrategicamente montado para o seu biotipo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="planos">
+        <div class="container">
+            <h2 class="section-title">Planos e Preços</h2>
+            <div class="row justify-content-center g-4">
+                <!-- Plano Mensal -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card">
+                        <h3 class="pricing-title">Mensal</h3>
+                        <div class="pricing-price">R$ 100<span>/mês</span></div>
+                        <ul class="list-unstyled text-start mb-4 text-light">
+                            <li class="mb-2">✓ Acesso livre a todos equipamentos</li>
+                            <li class="mb-2">✓ Avaliação física inicial</li>
+                            <li class="mb-2">✓ Suporte dos professores no salão</li>
+                            <li class="mb-2 text-muted"><del>✕ Ficha de treino personalizada pelo personal</del></li>
+                        </ul>
+                        <button class="btn btn-gold w-100 mt-auto">Assinar Mensal</button>
+                    </div>
+                </div>
+                <!-- Plano Semestral -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="pricing-card" style="border-color: var(--primary-gold); transform: scale(1.05);">
+                        <div class="badge bg-warning text-dark position-absolute top-0 start-50 translate-middle px-3 py-2 rounded-pill">MAIS POPULAR</div>
+                        <h3 class="pricing-title">Semestral</h3>
+                        <div class="pricing-price">R$ 90<span>/mês</span></div>
+                        <p class="text-muted small">Cobrado em até 6x sem juros (Total: R$ 540)</p>
+                        <ul class="list-unstyled text-start mb-4 text-light">
+                            <li class="mb-2">✓ Acesso livre a todos equipamentos</li>
+                            <li class="mb-2">✓ Avaliação física bimensal</li>
+                            <li class="mb-2">✓ Suporte premium no salão</li>
+                            <li class="mb-2">✓ Acesso ao aplicativo de treinos</li>
+                        </ul>
+                        <button class="btn btn-gold w-100 mt-auto">Assinar Semestral</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    Quais são os horários de funcionamento?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    A Jaguar Fitness funciona de segunda a sexta-feira, das 05h30 às 23h00. Aos sábados, abrimos das 08h00 às 14h00, e aos domingos das 09h00 às 13h00.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    Preciso pagar taxa de matrícula?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Não! Aqui na Jaguar Fitness nós não cobramos taxa de matrícula nem taxa de manutenção anual. Você paga apenas o valor do plano escolhido.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                    Posso fazer uma aula experimental?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sim! Oferecemos 1 dia de aula experimental gratuita para você conhecer nossa infraestrutura e nossos profissionais antes de fechar o seu plano.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                    Os planos incluem aulas com os Personais Karla e Flávio?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Os planos de mensalidade dão direito à utilização da academia com suporte dos instrutores de salão. O acompanhamento exclusivo e montagem de treinos individualizados pela Karla ou pelo Flávio são serviços de Personal Trainer contratados à parte diretamente com eles.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center" style="background-color: var(--darker-bg); border-top: 1px solid #333;">
+        <div class="container">
+            <p class="mb-0 text-muted">&copy; 2026 Jaguar Fitness. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
